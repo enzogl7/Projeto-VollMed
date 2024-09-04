@@ -27,23 +27,24 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return
-                http.csrf(csrf -> csrf.disable())
-                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        .authorizeHttpRequests(req -> {
-                            req.requestMatchers("/login").permitAll();
-                            req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                            req.anyRequest().authenticated();
-                        })
-                        .formLogin(form -> {
-                            form.loginPage("/login").defaultSuccessUrl("/login/login");
-                        })
-                        .logout(logout -> {
-                            logout.logoutUrl("/login/logout");
-                        })
-                        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                        .build();
+        return http.csrf(csrf -> csrf.disable())
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(req -> {
+                    req.requestMatchers("/login", "/login/efetuarLogin").permitAll();
+                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                    req.requestMatchers("/assets/**").permitAll();
+                    req.anyRequest().authenticated();
+                })
+                .formLogin(form -> {
+                    form.loginPage("/login").defaultSuccessUrl("/login/login");
+                })
+                .logout(logout -> {
+                    logout.logoutUrl("/login/logout");
+                })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
+
 
 
 
