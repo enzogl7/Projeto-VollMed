@@ -1,0 +1,21 @@
+body {
+    background: linear-gradient(to bottom, #ffffff, #e3f2fd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.login-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 20rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
