@@ -30,13 +30,13 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/login", "/login/efetuarLogin").permitAll();
+                    req.requestMatchers("/login", "login/efetuarLogin").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers("/assets/**").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .formLogin(form -> {
-                    form.loginPage("/login").defaultSuccessUrl("/login/login");
+                    form.loginPage("/login").defaultSuccessUrl("/home");
                 })
                 .logout(logout -> {
                     logout.logoutUrl("/login/logout");

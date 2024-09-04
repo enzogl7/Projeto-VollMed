@@ -5,7 +5,6 @@ $(document).ready(function() {
             login: $("#email").val(),
             senha: $("#senha").val()
         }
-        console.log(dados)
 
         $.ajax({
             url: "/login/efetuarLogin",
@@ -14,7 +13,7 @@ $(document).ready(function() {
             data: JSON.stringify(dados),
             success: function(response) {
                 if (response.token) {
-                    alert("Login bem-sucedido!");
+                    window.location.href = '/home';
                 } else {
                     Swal.fire({
                         icon: "error",
