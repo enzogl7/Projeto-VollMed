@@ -14,6 +14,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 @Controller
 @RequestMapping("/login")
 public class AutenticacaoController {
@@ -29,7 +31,7 @@ public class AutenticacaoController {
     @GetMapping
     public String carregarFormularioLogin(@AuthenticationPrincipal Usuario logado) {
         if (logado != null) {
-            return "redirect:/";
+            return "redirect:/home/homepage";
         }
 
         return LOGIN_PAGE;

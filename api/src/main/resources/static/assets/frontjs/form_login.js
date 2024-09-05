@@ -4,7 +4,7 @@ $(document).ready(function() {
         var dados = {
             login: $("#email").val(),
             senha: $("#senha").val()
-        }
+        };
 
         $.ajax({
             url: "/login/efetuarLogin",
@@ -12,8 +12,11 @@ $(document).ready(function() {
             contentType: "application/json",
             data: JSON.stringify(dados),
             success: function(response) {
+                console.log(response)
                 if (response.token) {
-                    window.location.href = '/home';
+                    console.log(response.token)
+                    window.redirectUrl = "/home/homepage"
+                    console.log("chamou homepage")
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -22,7 +25,7 @@ $(document).ready(function() {
                     });
                 }
             },
-            error: function() {
+            error: function(xhr, status, error) {
                 Swal.fire({
                     icon: "error",
                     title: "Erro",
@@ -31,4 +34,9 @@ $(document).ready(function() {
             }
         });
     });
+
+    function getToken() {
+        return localStorage.getItem('jwtToken');
+    }
+
 });
